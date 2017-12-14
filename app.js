@@ -23,7 +23,7 @@ var Blog = mongoose.model("Blog", blogSchema);
 
 //ROUTES - RESTfull
 
-   // root route
+   // ROOT route
 app.get("/", function(req, res) {
     res.redirect("/blogs");
 })
@@ -39,23 +39,25 @@ app.get("/blogs", function(req, res){
    });
 });
 
-// app.get("/sisajga", function(req, res){
-//     Blog.create(
-//         {
-//             title: "Kotez", 
-//             image: "https://farm8.staticflickr.com/7252/7626464792_3e68c2a6a5.jpg",
-//             body: "This is Kotez. No bathrooms,no water. Only Ice Neegruteen!"
-//         }, function(err, blog){
-//             if(err){
-//                 console.log(err);
-//                 res.send('Doslo je do greske');
-//             } else {
-//                 console.log("NEWLY CREATED BLOG");
-//                 console.log(blog);
-//                 res.send('Dodao sam novi blog');
-//             }
-//         });
-// });
+// NEW ROUTE - GET
+app.get("/blogs/new", function(req, res){
+    res.render("new");
+});
+
+
+
+// CREATE ROUTE 
+app.post("/blogs", function(req, res){
+    //create blog
+    Blog.create(req.body.blog, function(err, newBlog){
+        if(err){
+            res.render("new");
+        } else{    //redirect index
+            res.redirect("/blogs");
+        }
+    });
+});
+
 
 
 // APP LISTENER
