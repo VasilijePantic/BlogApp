@@ -5,3 +5,7 @@ i {
 .container.main {
     margin-top: 7.0em;
 }
+
+#delete{
+    display: inline;
+}
